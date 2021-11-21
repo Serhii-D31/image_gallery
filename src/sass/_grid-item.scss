@@ -1,0 +1,91 @@
+.addToCol {
+  visibility: hidden;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0.6;
+  transition: visibility 0.4s;
+  padding: 4px 4px 2px;
+  border-radius: 50%;
+  background-color: $gridItemBkg;
+  cursor: pointer;
+  color: rgb(10, 121, 84);
+  z-index: 6;
+}
+
+.autor {
+  visibility: hidden;
+  display: inline-flex;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: max-content;
+  border-radius: 15px;
+  padding: 2px;
+  align-items: center;
+  transition: visibility 0.4s;
+  cursor: grab;
+
+  img {
+    width: 25px;
+    border-radius: 50%;
+  }
+
+  span {
+    border-radius: 5px;
+    background-color: $gridItemBkg;
+    padding: 2px;
+  }
+
+  span:last-child {
+    margin-left: 5px;
+    text-align: left;
+  }
+}
+
+.clickDload {
+  visibility: hidden;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0.6;
+  transition: visibility 0.4s;
+  background-color: $gridItemBkg;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgb(122, 67, 10);
+}
+
+.grid-item:hover .addToCol,
+.grid-item:hover .autor,
+.grid-item:hover .clickDload {
+  visibility: visible;
+}
+
+.grid-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(41, 58, 67, 0);
+  border-radius: 5px;
+  transition: background-color 1.2s;
+  cursor: zoom-in;
+}
+
+.grid-item:hover::before {
+  background-color: rgba(41, 58, 67, 0.6);
+}
+
+.addToCol:hover,
+.clickDload:hover {
+  opacity: 1;
+}
+.clicked {
+  opacity: 1;
+  color: rgb(5, 46, 32);
+}

@@ -1,0 +1,106 @@
+.footer {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2%;
+  width: 100%;
+  padding: 10% 9% 13% 9%;
+  background: url("../img/footer-bkg.jpg") no-repeat center;
+  background-size: cover;
+
+  h2 {
+    font-family: "Playfair Display";
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    text-transform: uppercase;
+    margin-bottom: 10%;
+  }
+
+  p {
+    font-family: "PT Sans";
+    font-size: 14px;
+    line-height: 150%;
+  }
+
+  div:nth-child(3) {
+    padding-left: 10%;
+  }
+
+  .subscribe-case {
+    position: relative;
+    padding: 0 69px 0 0;
+    text-align: left;
+    border-radius: 5px;
+  }
+
+  .footer-list-cont {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3vh;
+    grid-auto-rows: 60%;
+  }
+
+  .footer-list {
+    display: grid;
+    padding: 3% 6%;
+    color: rgb(208, 208, 208);
+    background-color: rgb(15, 15, 15);
+    text-align: center;
+    align-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .colspan-2 {
+    grid-column: span 2;
+  }
+
+  [type="email"] {
+    padding: 0px 10px;
+    border: none;
+    background-color: rgba(87, 124, 39, 0.4);
+    width: 95%;
+    height: 40px;
+    color: rgb(206, 157, 157);
+  }
+
+  [type="email"]::placeholder {
+    color: white;
+  }
+
+  [type="submit"] {
+    position: absolute;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: rgba(15, 15, 15);
+    height: 40px;
+    cursor: pointer;
+  }
+}
+
+.bottom-line {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  justify-content: space-between;
+  padding: 2vh 9vh;
+  background-color: rgba(15, 15, 15);
+  font-family: "PT Sans";
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: rgb(208, 208, 208);
+  margin: 0;
+
+  span {
+    display: inline-block;
+  }
+
+  span > a:hover {
+    color: rgb(100, 29, 233);
+  }
+
+  span:last-child {
+    text-transform: uppercase;
+  }
+}

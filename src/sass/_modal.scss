@@ -1,0 +1,113 @@
+.backdrop {
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.71);
+}
+
+.modal-window {
+  visibility: hidden;
+  position: absolute;
+  z-index: 5;
+  width: 80%;
+  height: max-content;
+  top: 25px;
+  left: 0;
+  background-color: rgba(23, 69, 90, 0.788);
+  border-radius: 15px;
+  text-align: center;
+  padding: 0 30px 10px;
+
+  img {
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  .modal-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+    height: 80px;
+    padding: 5px;
+    margin: 0;
+
+    .autor {
+      visibility: visible;
+      display: inline-flex;
+      position: relative;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      height: max-content;
+      border-radius: 15px;
+      padding: 2px;
+      align-items: center;
+      cursor: grab;
+
+      img {
+        width: 45px;
+        border-radius: 50%;
+      }
+
+      span {
+        border-radius: 5px;
+        background-color: $gridItemBkg;
+        padding: 5px;
+        text-align: left;
+      }
+    }
+  }
+
+  .clickItems {
+    display: inline-flex;
+    width: max-content;
+    height: max-content;
+    align-items: center;
+
+    .clickDload {
+      visibility: visible;
+      position: relative;
+      bottom: 0;
+      right: 0;
+      opacity: 0.6;
+      background-color: $gridItemBkg;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: rgb(122, 67, 10);
+      a {
+        color: rgb(122, 67, 10);
+      }
+    }
+
+    .addToCol {
+      visibility: visible;
+      position: relative;
+      display: inline-block;
+      top: 0;
+      right: 0;
+      opacity: 0.6;
+      padding: 4px 4px 2px;
+      margin-right: 20px;
+      border-radius: 50%;
+      background-color: $gridItemBkg;
+      cursor: pointer;
+    }
+
+    .addToCol:hover,
+    .clickDload:hover {
+      opacity: 1;
+    }
+
+    .clicked {
+      opacity: 1;
+      color: rgb(5, 46, 32);
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.grid-line {
+  border-style: solid none none none;
+  border-top-color: rgb(227, 165, 0);
+  border-top-width: 2px;
+  box-shadow: 2px 0 2px 1px rgb(235, 212, 139);
+  margin: 0;
+}
+
+.grid {
+  margin: 45px auto 35px;
+  max-height: 100%;
+
+  .grid-sizer,
+  .grid-item {
+    width: 400px;
+  }
+
+  .grid-item {
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  }
+}
+
+.pagination-buttons {
+  display: inline-flex;
+  min-width: 200px;
+}
+
+.interiorPaginCont {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  max-width: 675px;
+  margin: 0 5%;
+}
+
+.pagination-buttons__item {
+  margin-left: $buttonMargin;
+  padding: $buttonPadding;
+  border: none;
+  background-color: $buttonColor;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 900;
+  color: $buttonTextColor;
+  transition: border-radius 0.8s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-hover:hover {
+  background-color: $accentColor;
+  color: $accentColorText;
+  border-radius: 20px;
+}
+
+.active {
+  background-color: $activeColor;
+  color: $accentColorText;
+  border-radius: 20px;
+  border: none;
+}

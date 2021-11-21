@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <div class="autor">
+    <span> <img src="{{user.profile_image.small}}" alt="ava" /> </span>
+    <span> {{user.name}} </span>
+  </div>
+
+  <div class="clickItems">
+    <span class="addToCol" data-id="{{id}}">
+      <i class="fas fa-heart fa-2x"></i>
+    </span>
+    <span class="clickDload">
+      <a href="{{urls.full}}" download>
+        <i class="fas fa-file-download fa-2x"></i>
+      </a>
+    </span>
+  </div>
+</div>
+
+<div class="img-cont">
+  <img id="{{id}}" src="{{urls.regular}}" alt="{{alt_description}}" />
+</div>
