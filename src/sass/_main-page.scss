@@ -21,6 +21,23 @@
     border-radius: 10px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
+
+  .empty-coll {
+    width: max-content;
+    margin: 50px auto;
+    padding: 20px;
+    color: rgb(3, 77, 3);
+    background-color: rgb(150, 59, 214);
+    border-radius: 10px;
+    h3 {
+      margin: 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+    svg {
+      margin-top: 20px;
+    }
+  }
 }
 
 .pagination-buttons {

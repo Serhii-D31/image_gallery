@@ -309,6 +309,7 @@ async function showYourColl() {
   clearDisplay();
   paginationCont.style.visibility = "hidden";
   scrollToTop();
+  cont.style.height = document.documentElement.clientHeight + "px";
 
   let yourCollArr = [];
 
@@ -317,7 +318,16 @@ async function showYourColl() {
       .fetchImgById(yourColl[i])
       .then((result) => yourCollArr.push(result));
   }
-  renderData(yourCollArr);
+  yourCollArr.length === 0
+    ? (cont.innerHTML = `
+    <div class="empty-coll">
+      <h3>
+        Please, tup any hearts before image <br />
+        to get to the your collection <br />
+        <i class="fas fa-smile-wink fa-2x"></i>
+      </h3>
+    </div>`)
+    : renderData(yourCollArr);
 }
 
 // Search by btn
