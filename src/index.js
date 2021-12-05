@@ -11,125 +11,26 @@ const debounce = require("lodash.debounce");
 
 const apiService = new ApiService();
 const cont = document.querySelector(".grid");
-const paginationCont = document.querySelector(".pagination-buttons");
+const paginationCont = document.querySelector(".pagination-cont");
+const paginationArrow = document.querySelector(".pagination-arrow");
+// const chevron = document.querySelectorAll(".chevron");
 const queryInputs = document.querySelectorAll('[type="search"]');
 const queryAlerts = document.querySelectorAll(".query-alert");
 const modalWindow = document.querySelector(".modal-window");
 const yourCollBtn = document.querySelector(".your-coll-btn");
 const topList = document.querySelectorAll(".top-list");
 const footerList = document.querySelectorAll(".footer-list");
-var allButtons = "";
-
+var queryPage = "";
+var totalPages = "";
 // On load
 function onLoad() {
   // Render default images
-  apiService.fetchImagesByKeyWords(apiService.query).then(({ results }) => {
-    renderData(results);
-    let currentBtn = allButtons.find(
-      (el) => el.textContent == apiService.queryPage
-    );
-    addActiveClass(currentBtn);
-  });
-
-  // Pagination;
-  let paginationLength = 15;
-  createPagination(paginationLength);
-
-  allButtons = Array.from(
-    document.querySelectorAll(".pagination-buttons__item")
-  );
-
-  // All number button
-  allButtons.slice(1, -1).forEach((el) => {
-    el.onclick = function () {
-      if (apiService.queryPage === Number(el.textContent)) {
-        return true;
-      } else {
-        scrollToTop();
-        clearActiveClass();
-        el.classList.remove("btn-hover");
-        el.classList.add("active");
-
-        apiService.queryPage = Number(el.textContent);
-
-        apiService
-          .fetchImagesByKeyWords(apiService.query)
-          .then(({ results }) => {
-            renderData(results);
-          });
-      }
-    };
-  });
-
-  // Prev, Next btn
-  [allButtons[0], allButtons.at(-1)].forEach((el) => {
-    el.onclick = function () {
-      if (
-        (apiService.queryPage > 1 && el.dataset.type === "prev-b") ||
-        (apiService.queryPage < paginationLength &&
-          el.dataset.type === "next-b")
-      ) {
-        if (el.dataset.type === "next-b") {
-          Number((apiService.queryPage += 1));
-          scrollToTop();
-          // Changing current btn style
-          clearActiveClass();
-          let currentBtn = allButtons.find(
-            (el) => el.textContent == apiService.queryPage
-          );
-          addActiveClass(currentBtn);
-          /////////////////////////////////////
-          apiService
-            .fetchImagesByKeyWords(apiService.query)
-            .then(({ results }) => {
-              renderData(results);
-            });
-        } else {
-          Number((apiService.queryPage -= 1));
-          scrollToTop();
-          // Changing current btn style
-          clearActiveClass();
-          let currentBtn = allButtons.find(
-            (el) => el.textContent == apiService.queryPage
-          );
-          addActiveClass(currentBtn);
-          /////////////////////////////////////
-          apiService
-            .fetchImagesByKeyWords(apiService.query)
-            .then(({ results }) => {
-              renderData(results);
-            });
-        }
-      }
-    };
-  });
-}
-
-// Clear active class
-function clearActiveClass() {
-  allButtons.slice(1, -1).forEach((el) => {
-    el.classList.contains("active") ? el.classList.remove("active") : true;
-    el.classList.contains("btn-hover") ? true : el.classList.add("btn-hover");
-  });
-}
-// Add active class
-function addActiveClass(currentBtn) {
-  currentBtn.classList.remove("btn-hover");
-  currentBtn.classList.add("active");
-}
-
-// Pagination
-function createPagination(paginationLength) {
-  let buttonsStr =
-    '<span class="pagination-buttons__item btn-hover" data-type="prev-b"><i class="fas fa-caret-left fa-lg"></i></span> <div class="interiorPaginCont">';
-  for (let i = 0; i < paginationLength; i++) {
-    buttonsStr += `<span class="pagination-buttons__item btn-hover">${
-      i + 1
-    }</span>`;
-  }
-  buttonsStr +=
-    '</div> <span class="pagination-buttons__item btn-hover" data-type="next-b"><i class="fas fa-caret-right fa-lg"></i></span>';
-  paginationCont.innerHTML = buttonsStr;
+  apiService
+    .fetchImagesByKeyWords(apiService.query)
+    .then(({ results, total_pages }) => {
+      renderData(results);
+      totalPages = total_pages;
+    });
 }
 
 // Render image
@@ -142,7 +43,7 @@ function renderData(data) {
       output += gridItem(e);
     }
   });
-  cont.innerHTML = output;
+  cont.innerHTML += output;
 
   // Use masonry
   imagesLoaded(cont).on("progress", function () {
@@ -177,9 +78,9 @@ function onQueryInput(e) {
     apiService.queryPage = 1;
     apiService
       .fetchImagesByKeyWords(e.target.value)
-      .then(({ results }) => {
+      .then(({ results, total_pages }) => {
         if (results.length > 0) {
-          return results;
+          return [results, total_pages];
         } else {
           queryAlerts.forEach((e) => {
             if (e.classList.contains(`${searchAlert}`)) {
@@ -188,15 +89,12 @@ function onQueryInput(e) {
           });
         }
       })
-      .then((results) => {
+      .then(([results, total_pages]) => {
         results.length > 0 ? scrollToTop() : true;
-        paginationCont.style.visibility = "visible";
-        clearActiveClass();
-        let currentBtn = allButtons.find(
-          (el) => el.textContent == apiService.queryPage
-        );
-        addActiveClass(currentBtn);
+        clearDisplay();
         renderData(results);
+        paginationCont.style.visibility = "visible";
+        totalPages = total_pages;
       });
   }
 }
@@ -235,7 +133,6 @@ function openModalWindow() {
 async function getImgInfo(imgId) {
   let el = await apiService.fetchImgById(imgId);
   modalWindow.innerHTML = modal(el);
-
   clickedToggle();
 }
 
@@ -306,9 +203,10 @@ function clearDisplay() {
 
 // Render your collection
 async function showYourColl() {
+  clearInputValue();
   clearDisplay();
-  paginationCont.style.visibility = "hidden";
   scrollToTop();
+  paginationCont.style.visibility = "hidden";
   cont.style.height = document.documentElement.clientHeight + "px";
 
   let yourCollArr = [];
@@ -332,25 +230,49 @@ async function showYourColl() {
 
 // Search by btn
 function getCollByBtn(e) {
+  clearInputValue();
   let collName = e.currentTarget.dataset.coll;
-
   apiService.queryPage = 1;
 
   apiService
     .fetchImagesByKeyWords(collName)
-    .then(({ results }) => {
-      return results;
+    .then(({ results, total_pages }) => {
+      return [results, total_pages];
     })
-    .then((results) => {
+    .then(([results, total_pages]) => {
       scrollToTop();
+      clearDisplay();
+      renderData(results);
+      totalPages = total_pages;
       paginationCont.style.visibility = "visible";
-      clearActiveClass();
-      let currentBtn = allButtons.find(
-        (el) => el.textContent == apiService.queryPage
-      );
-      addActiveClass(currentBtn);
+    });
+}
+
+// Clear input value
+function clearInputValue() {
+  queryInputs.forEach((e) => {
+    e.value = "";
+  });
+}
+
+// Show more images
+function getMoreImg() {
+  if (apiService.queryPage < totalPages) {
+    apiService.queryPage++;
+
+    apiService.fetchImagesByKeyWords(apiService.query).then(({ results }) => {
       renderData(results);
     });
+  } else if (apiService.queryPage === totalPages) {
+    apiService.fetchImagesByKeyWords(apiService.query).then(({ results }) => {
+      renderData(results);
+    });
+    paginationCont.style.visibility = "hidden";
+    paginationArrow.removeEventListener("click", getMoreImg());
+  } else {
+    paginationCont.style.visibility = "hidden";
+    paginationArrow.removeEventListener("click", getMoreImg());
+  }
 }
 
 window.addEventListener("load", onLoad());
@@ -359,6 +281,9 @@ window.addEventListener("load", onLoad());
 queryInputs.forEach((e) => {
   e.addEventListener("input", debounce(onQueryInput, 1000));
 });
+
+// Listener get more images
+paginationArrow.addEventListener("click", getMoreImg);
 
 // Listener search by btn
 topList.forEach((e) => {

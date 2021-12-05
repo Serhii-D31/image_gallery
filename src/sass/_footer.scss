@@ -64,6 +64,7 @@
     width: 95%;
     height: 40px;
     color: rgb(206, 157, 157);
+    border-radius: 5px 0 0 5px;
   }
 
   [type="email"]::placeholder {
@@ -77,6 +78,7 @@
     background-color: rgba(15, 15, 15);
     height: 40px;
     cursor: pointer;
+    border-radius: 0 5px 5px 0;
   }
 }
 
