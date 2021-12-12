@@ -1,31 +1,36 @@
 .footer {
   position: relative;
-  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2%;
-  width: 100%;
-  padding: 10% 9% 13% 9%;
+  grid-template-columns: 1fr;
+  height: 87vh;
+  padding: 7% 9%;
+  text-align: center;
   background: url("../img/footer-bkg.jpg") no-repeat center;
-  background-size: cover;
+  z-index: 2;
+
+  .footer div:nth-child(3) {
+    padding-left: 0;
+  }
+
+  .footer div {
+    margin-top: 10px;
+  }
 
   h2 {
     font-family: "Playfair Display";
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
-    line-height: 32px;
+    line-height: 26px;
     text-transform: uppercase;
-    margin-bottom: 10%;
+    margin: 0;
+    margin-bottom: 4%;
   }
 
   p {
     font-family: "PT Sans";
     font-size: 14px;
     line-height: 150%;
-  }
-
-  div:nth-child(3) {
-    padding-left: 10%;
+    margin: 0 0 4%;
   }
 
   .subscribe-case {
@@ -39,7 +44,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3vh;
-    grid-auto-rows: 60%;
+    grid-auto-rows: 6vh;
+    margin: 3% auto 5%;
   }
 
   .footer-list {
@@ -71,6 +77,10 @@
     color: white;
   }
 
+  [type="email"]:focus {
+    outline: 1px solid rgb(179, 247, 90);
+  }
+
   [type="submit"] {
     position: absolute;
     border: none;
@@ -84,25 +94,139 @@
 
 .bottom-line {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
+  grid-template-columns: 5fr 2fr 5fr;
+  height: 7vh;
   justify-content: space-between;
-  padding: 2vh 9vh;
+  padding: 10px;
   background-color: rgba(15, 15, 15);
   font-family: "PT Sans";
-  font-size: 0.8rem;
-  line-height: 1rem;
+  font-size: 1rem;
+  align-items: center;
   color: rgb(208, 208, 208);
   margin: 0;
 
   span {
     display: inline-block;
+    text-align: center;
   }
 
   span > a:hover {
     color: rgb(100, 29, 233);
   }
 
-  span:last-child {
+  span:first-child {
+    font-size: 0.6rem;
     text-transform: uppercase;
+    text-align: left;
+  }
+
+  span:last-child {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    text-align: right;
+  }
+}
+
+@media (min-width: $landscapePhones) {
+  .footer {
+    padding: 3% 9%;
+
+    .footer-list-cont {
+      width: 60vh;
+    }
+
+    .subscribe-case {
+      width: 60vh;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    [type="email"] {
+      width: 78%;
+    }
+
+    [type="submit"] {
+      width: 22%;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .footer {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2%;
+    width: 100%;
+    padding: 10% 6%;
+    background: url("../img/footer-bkg.jpg") no-repeat center;
+    background-size: cover;
+
+    h2 {
+      font-family: "Playfair Display";
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+      text-transform: uppercase;
+      margin-bottom: 10%;
+    }
+
+    p {
+      font-family: "PT Sans";
+      font-size: 14px;
+      line-height: 150%;
+    }
+
+    div:nth-child(3) {
+      padding-left: 10%;
+    }
+
+    [type="email"] {
+      padding: 0px 10px;
+      border: none;
+      background-color: rgba(87, 124, 39, 0.4);
+      width: 78%;
+      height: 40px;
+      color: rgb(206, 157, 157);
+      border-radius: 5px 0 0 5px;
+    }
+
+    [type="email"]::placeholder {
+      color: white;
+    }
+
+    [type="submit"] {
+      position: absolute;
+      width: 22%;
+      border: none;
+      color: rgb(255, 255, 255);
+      background-color: rgba(15, 15, 15);
+      height: 40px;
+      cursor: pointer;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+
+  .bottom-line {
+    display: grid;
+    grid-template-columns: 5fr 2fr 5fr;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(15, 15, 15);
+    font-family: "PT Sans";
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color: rgb(208, 208, 208);
+    margin: 0;
+
+    span {
+      display: inline-block;
+    }
+
+    span > a:hover {
+      color: rgb(100, 29, 233);
+    }
+
+    span:last-child {
+      text-transform: uppercase;
+    }
   }
 }

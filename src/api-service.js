@@ -1,7 +1,7 @@
 export default class ApiService {
   constructor() {
     this.URL = "https://api.unsplash.com/";
-    this.API_KEY = "IOmMPsNCdSs34nBqLfNar1wu83RWoXZdT6fzsGeGMas";
+    this.API_KEY = "smFunFfG6i4FJdG9vIZ0uB_uD_J_V_igusZp-Aq6Cq4";
     this.query = "cars";
     this.queryPage = 1;
     this.options = {

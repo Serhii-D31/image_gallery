@@ -13,15 +13,14 @@ const apiService = new ApiService();
 const cont = document.querySelector(".grid");
 const paginationCont = document.querySelector(".pagination-cont");
 const paginationArrow = document.querySelector(".pagination-arrow");
-// const chevron = document.querySelectorAll(".chevron");
 const queryInputs = document.querySelectorAll('[type="search"]');
 const queryAlerts = document.querySelectorAll(".query-alert");
 const modalWindow = document.querySelector(".modal-window");
 const yourCollBtn = document.querySelector(".your-coll-btn");
 const topList = document.querySelectorAll(".top-list");
 const footerList = document.querySelectorAll(".footer-list");
-var queryPage = "";
 var totalPages = "";
+
 // On load
 function onLoad() {
   // Render default images
@@ -29,6 +28,7 @@ function onLoad() {
     .fetchImagesByKeyWords(apiService.query)
     .then(({ results, total_pages }) => {
       renderData(results);
+      console.log(results);
       totalPages = total_pages;
     });
 }
@@ -57,9 +57,11 @@ function renderData(data) {
     masonry.layout();
   });
 
-  document.querySelectorAll(".grid-item").forEach((e) => {
-    e.addEventListener("click", onItemClick);
-  });
+  window.innerWidth >= 768
+    ? document.querySelectorAll(".grid-item").forEach((e) => {
+        e.addEventListener("click", onItemClick);
+      })
+    : true;
 
   clickedToggle();
 }
@@ -90,7 +92,7 @@ function onQueryInput(e) {
         }
       })
       .then(([results, total_pages]) => {
-        results.length > 0 ? scrollToTop() : true;
+        results.length > 0 ? scrollToTop : true;
         clearDisplay();
         renderData(results);
         paginationCont.style.visibility = "visible";
@@ -120,10 +122,6 @@ function openModalWindow() {
   document.querySelector(".search-with-buttons").style.visibility = "hidden";
   document.querySelector(".moveToTop").hidden = true;
   document.querySelector(".backdrop").hidden = false;
-  modalWindow.style.left =
-    "calc((" +
-    (document.documentElement.clientWidth - modalWindow.offsetWidth) +
-    "px) / 2)";
   modalWindow.style.visibility = "visible";
   document.body.style.overflow = "hidden";
   document.querySelector(".backdrop").addEventListener("click", onOverlayClick);
@@ -140,8 +138,8 @@ async function getImgInfo(imgId) {
 function clickedToggle() {
   document.querySelectorAll(".addToCol").forEach((el) => {
     el.addEventListener("click", (e) => {
-      addToColl(e);
       el.classList.toggle("clicked");
+      addToColl(e);
     });
   });
 }
@@ -184,8 +182,8 @@ let yourColl = localStorage.getItem("IMG_KEY")
 
 // Your collection
 function addToColl(e) {
-  const imgName = e.currentTarget.dataset.id;
   e.stopPropagation();
+  const imgName = e.currentTarget.dataset.id;
   const index = yourColl.indexOf(imgName);
 
   if (index === -1) {
@@ -295,3 +293,17 @@ footerList.forEach((el) => {
 
 // Render yuor collection
 yourCollBtn.addEventListener("click", showYourColl);
+
+window.addEventListener("resize", changePlacehold);
+
+function changePlacehold() {
+  window.innerWidth < 576
+    ? document
+        .getElementById("search-on-top")
+        .setAttribute("placeholder", "Search free photos")
+    : document
+        .getElementById("search-on-top")
+        .setAttribute("placeholder", "Search free high-resolution photos");
+}
+
+changePlacehold();

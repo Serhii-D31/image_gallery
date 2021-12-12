@@ -1,16 +1,23 @@
 <div class="grid-item" data-id="{{id}}">
-  <span class="addToCol" data-id="{{id}}">
-    <i class="fas fa-heart fa-2x"></i>
-  </span>
+   <div class="top-span-cont">
+    <span class="addToCol" data-id="{{id}}">
+      <i class="fas fa-heart fa-2x"></i>
+    </span>
 
-  <img src="{{urls.small}}" alt="{{alt_description}}" />
-
-  <div class="autor" onclick="event.stopPropagation()">
-    <span> <img src="{{user.profile_image.small}}" alt="ava" /> </span>
-    <span> {{user.name}} </br> {{user.location}} </span>
+    <span class="clickDload" onclick="event.stopPropagation()">
+      <a href="{{links.download_location}}" download>
+        <i class="fas fa-file-download fa-2x"></i>
+      </a>
+    </span>
   </div>
 
-  <span class="clickDload" onclick="event.stopPropagation()">
-    <i class="fas fa-file-download fa-2x"></i>
-  </span>
+  <img src="{{urls.regular}}" alt="{{alt_description}}" data-id="{{id}}"/>
+
+  <div class="autor-cont" onclick="event.stopPropagation()">
+    <div class="autor" onclick="event.stopPropagation()">
+      <span> <img src="{{user.profile_image.small}}" alt="ava" /> </span>
+      <span>Photo by <a href="{{user.links.html}}?utm_source=New_gallery&utm_medium=referral"> {{user.name}} </a> on <a href="https://unsplash.com/?utm_source=New_gallery&utm_medium=referral"> Unsplash</a> </br> <span> {{user.location}} </span> </span>
+    </div>
+  </div>
+
 </div>

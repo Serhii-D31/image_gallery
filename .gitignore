@@ -1,5 +1,5 @@
 .babelrc
 .posthtmlrc.js
-.cashe
+/cashe
 /dist
 /node_modules

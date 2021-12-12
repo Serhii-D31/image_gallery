@@ -7,39 +7,80 @@
 }
 
 .grid {
-  margin: 45px auto 35px;
+  margin: 25px auto 15px;
   max-height: 100%;
 
   .grid-sizer,
   .grid-item {
-    width: 400px;
+    min-width: 300px;
   }
 
   .grid-item {
-    margin-bottom: 20px;
+    position: relative;
+    margin: 0 auto 20px;
     overflow: hidden;
-    border-radius: 10px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    text-align: center;
+    padding: 50px 0 80px;
   }
+}
 
-  .empty-coll {
-    width: max-content;
-    margin: 50px auto;
-    padding: 20px;
-    color: rgb(3, 77, 3);
-    background-color: rgb(150, 59, 214);
-    border-radius: 10px;
-    h3 {
-      margin: 0;
-      font-size: 2rem;
-      text-align: center;
+@media (min-width: $landscapePhones) {
+  .grid {
+    .grid-sizer,
+    .grid-item {
+      max-width: 500px;
     }
-    svg {
-      margin-top: 20px;
+
+    .grid-item {
+      border-radius: 10px;
     }
   }
 }
 
+@media (min-width: $tablet) {
+  .grid {
+    margin: 45px auto 35px;
+
+    .grid-sizer,
+    .grid-item {
+      min-width: 350px;
+      max-width: 420px;
+    }
+
+    .grid-item {
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+
+    .empty-coll {
+      width: max-content;
+      margin: 50px auto;
+      padding: 20px;
+      color: rgb(3, 77, 3);
+      background-color: rgb(150, 59, 214);
+      border-radius: 10px;
+      h3 {
+        margin: 0;
+        font-size: 2rem;
+        text-align: center;
+      }
+      svg {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .grid {
+    .grid-item {
+      padding: 0;
+    }
+  }
+}
 // Pagination arrow styles
 .pagination-cont {
   padding: 20px;
@@ -67,8 +108,8 @@
 
   .chevron {
     position: absolute;
-    width: $base * 3.5;
-    height: $base * 0.8;
+    width: $basePaginArrow * 3.5;
+    height: $basePaginArrow * 0.8;
     opacity: 0;
     transform: scale(0.3);
     animation: move-chevron 3s ease-out infinite;
@@ -114,54 +155,15 @@
     }
     33.3% {
       opacity: 1;
-      transform: translateY($base * 3.8);
+      transform: translateY($basePaginArrow * 3.8);
     }
     66.6% {
       opacity: 1;
-      transform: translateY($base * 5.2);
+      transform: translateY($basePaginArrow * 5.2);
     }
     100% {
       opacity: 0;
-      transform: translateY($base * 8) scale(0.5);
+      transform: translateY($basePaginArrow * 8) scale(0.5);
     }
   }
 }
-
-// .pagination-buttons {
-//   display: inline-flex;
-//   min-width: 200px;
-// }
-
-// .interiorPaginCont {
-//   display: grid;
-//   grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
-//   max-width: 675px;
-//   margin: 0 5%;
-// }
-
-// .pagination-buttons__item {
-//   margin-left: $buttonMargin;
-//   padding: $buttonPadding;
-//   border: none;
-//   background-color: $buttonColor;
-//   border-radius: 5px;
-//   font-size: 20px;
-//   font-weight: 900;
-//   color: $buttonTextColor;
-//   transition: border-radius 0.8s;
-//   cursor: pointer;
-//   text-align: center;
-// }
-
-// .btn-hover:hover {
-//   background-color: $accentColor;
-//   color: $accentColorText;
-//   border-radius: 20px;
-// }
-
-// .active {
-//   background-color: $activeColor;
-//   color: $accentColorText;
-//   border-radius: 20px;
-//   border: none;
-// }
