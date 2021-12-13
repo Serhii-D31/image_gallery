@@ -1,5 +1,6 @@
 .babelrc
 .posthtmlrc.js
-/cashe
+.gitignore
+/.cache
 /dist
 /node_modules
