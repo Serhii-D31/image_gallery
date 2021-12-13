@@ -6,6 +6,7 @@
   padding: 7% 9%;
   text-align: center;
   background: url("../img/footer-bkg.jpg") no-repeat center;
+  background-size: cover;
   z-index: 2;
 
   .footer div:nth-child(3) {
@@ -19,11 +20,12 @@
   h2 {
     font-family: "Playfair Display";
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 26px;
     text-transform: uppercase;
     margin: 0;
     margin-bottom: 4%;
+    color: #c110c1;
   }
 
   p {
@@ -154,11 +156,94 @@
 @media (min-width: $desktop) {
   .footer {
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2%;
-    width: 100%;
+    grid-gap: 4%;
     padding: 10% 6%;
-    background: url("../img/footer-bkg.jpg") no-repeat center;
-    background-size: cover;
+
+    .footer-list-cont {
+      width: 100%;
+    }
+
+    h2 {
+      font-family: "Playfair Display";
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+      text-transform: uppercase;
+      margin-bottom: 10%;
+    }
+
+    p {
+      font-family: "PT Sans";
+      font-size: 14px;
+      line-height: 150%;
+    }
+
+    div:nth-child(3) {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    .subscribe-case {
+      width: 100%;
+    }
+
+    [type="email"] {
+      padding: 0px 10px;
+      border: none;
+      background-color: rgba(87, 124, 39, 0.4);
+      width: 70%;
+      height: 40px;
+      color: rgb(206, 157, 157);
+      border-radius: 5px 0 0 5px;
+    }
+
+    [type="email"]::placeholder {
+      color: white;
+    }
+
+    [type="submit"] {
+      position: absolute;
+      width: 30%;
+      border: none;
+      color: rgb(255, 255, 255);
+      background-color: rgba(15, 15, 15);
+      height: 40px;
+      cursor: pointer;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+
+  .bottom-line {
+    display: grid;
+    grid-template-columns: 5fr 2fr 5fr;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(15, 15, 15);
+    font-family: "PT Sans";
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color: rgb(208, 208, 208);
+    margin: 0;
+
+    span {
+      display: inline-block;
+    }
+
+    span > a:hover {
+      color: rgb(100, 29, 233);
+    }
+
+    span:last-child {
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (min-width: $lDesktop) {
+  .footer {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4%;
+    padding: 10% 6%;
 
     h2 {
       font-family: "Playfair Display";
