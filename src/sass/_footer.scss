@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  height: 87vh;
+  height: 88vh;
   padding: 7% 9%;
   text-align: center;
   background: url("../img/footer-bkg.jpg") no-repeat center;
@@ -99,7 +99,7 @@
   grid-template-columns: 5fr 2fr 5fr;
   height: 7vh;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 15px;
   background-color: rgba(15, 15, 15);
   font-family: "PT Sans";
   font-size: 1rem;
@@ -131,6 +131,7 @@
 
 @media (min-width: $landscapePhones) {
   .footer {
+    height: max-content;
     padding: 3% 9%;
 
     .footer-list-cont {
@@ -150,6 +151,12 @@
     [type="submit"] {
       width: 22%;
     }
+  }
+}
+
+@media (min-width: $tablet) {
+  .footer {
+    height: max-content;
   }
 }
 
@@ -244,6 +251,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 4%;
     padding: 10% 6%;
+    height: 88vh !important;
 
     h2 {
       font-family: "Playfair Display";
@@ -294,7 +302,7 @@
     display: grid;
     grid-template-columns: 5fr 2fr 5fr;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 1vh 5vh;
     background-color: rgba(15, 15, 15);
     font-family: "PT Sans";
     font-size: 0.8rem;

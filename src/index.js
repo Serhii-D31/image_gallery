@@ -28,7 +28,6 @@ function onLoad() {
     .fetchImagesByKeyWords(apiService.query)
     .then(({ results, total_pages }) => {
       renderData(results);
-      console.log(results);
       totalPages = total_pages;
     });
 }
@@ -273,7 +272,17 @@ function getMoreImg() {
   }
 }
 
+document.addEventListener("load", preloader());
 window.addEventListener("load", onLoad());
+
+// Preloader
+function preloader() {
+  document.body.classList.add("loaded-hiding");
+  window.setTimeout(function () {
+    document.querySelector(".preloader").classList.add("loaded");
+    document.body.classList.remove("loaded-hiding");
+  }, 500);
+}
 
 // Listener search by input
 queryInputs.forEach((e) => {
@@ -294,7 +303,25 @@ footerList.forEach((el) => {
 // Render yuor collection
 yourCollBtn.addEventListener("click", showYourColl);
 
-window.addEventListener("resize", changePlacehold);
+// Check layout
+function checkLayout() {
+  document.documentElement.clientHeight <= 500
+    ? ((document.querySelector(".footer").style.height = "max-content"),
+      (document.querySelector(".bottom-line").style.height = "max-content"))
+    : ((document.querySelector(".footer").style.height = "88vh"),
+      (document.querySelector(".bottom-line").style.height = "7vh"));
+}
+checkLayout();
+
+// Change placeholder
+window.addEventListener("resize", () => {
+  changePlacehold();
+  checkLayout();
+});
+window.addEventListener("orientationchange", () => {
+  changePlacehold();
+  checkLayout();
+});
 
 function changePlacehold() {
   window.innerWidth < 576
@@ -305,5 +332,4 @@ function changePlacehold() {
         .getElementById("search-on-top")
         .setAttribute("placeholder", "Search free high-resolution photos");
 }
-
 changePlacehold();
