@@ -16,7 +16,7 @@ const paginationArrow = document.querySelector(".pagination-arrow");
 const queryInputs = document.querySelectorAll('[type="search"]');
 const queryAlerts = document.querySelectorAll(".query-alert");
 const modalWindow = document.querySelector(".modal-window");
-const yourCollBtn = document.querySelector(".your-coll-btn");
+const yourCollBtn = document.querySelectorAll(".your-coll-btn");
 const topList = document.querySelectorAll(".top-list");
 const footerList = document.querySelectorAll(".footer-list");
 var totalPages = "";
@@ -62,6 +62,7 @@ function renderData(data) {
       })
     : true;
 
+  checkClicked(data);
   clickedToggle();
 }
 
@@ -91,7 +92,7 @@ function onQueryInput(e) {
         }
       })
       .then(([results, total_pages]) => {
-        results.length > 0 ? scrollToTop : true;
+        results.length > 0 ? scrollToTop() : true;
         clearDisplay();
         renderData(results);
         paginationCont.style.visibility = "visible";
@@ -110,7 +111,7 @@ document.querySelector(".moveToTop").addEventListener("click", scrollToTop);
 function scrollToTop() {
   let head = document.querySelector(".search-with-buttons");
   window.scrollTo({
-    top: document.documentElement.clientHeight - head.offsetHeight,
+    top: window.innerHeight - head.scrollHeight,
     left: 0,
     behavior: "smooth",
   });
@@ -139,6 +140,19 @@ function clickedToggle() {
     el.addEventListener("click", (e) => {
       el.classList.toggle("clicked");
       addToColl(e);
+    });
+  });
+}
+
+function checkClicked(data) {
+  let clickedId = data.map((e) => {
+    let id = yourColl.find((id) => id === e.id);
+    return id;
+  });
+  let addToColArr = Array.from(document.querySelectorAll(".addToCol"));
+  addToColArr.forEach((el) => {
+    clickedId.forEach((id) => {
+      id === el.dataset.id ? el.classList.add("clicked") : true;
     });
   });
 }
@@ -213,16 +227,16 @@ async function showYourColl() {
       .fetchImgById(yourColl[i])
       .then((result) => yourCollArr.push(result));
   }
-  yourCollArr.length === 0
-    ? (cont.innerHTML = `
+  yourCollArr.length !== 0
+    ? renderData(yourCollArr)
+    : (cont.innerHTML = `
     <div class="empty-coll">
       <h3>
         Please, tup any hearts before image <br />
         to get to the your collection <br />
         <i class="fas fa-smile-wink fa-2x"></i>
       </h3>
-    </div>`)
-    : renderData(yourCollArr);
+    </div>`);
 }
 
 // Search by btn
@@ -272,8 +286,12 @@ function getMoreImg() {
   }
 }
 
-document.addEventListener("load", preloader());
-window.addEventListener("load", onLoad());
+window.addEventListener("load", function () {
+  preloader();
+  onLoad();
+  changePlacehold();
+  checkLayout();
+});
 
 // Preloader
 function preloader() {
@@ -281,7 +299,7 @@ function preloader() {
   window.setTimeout(function () {
     document.querySelector(".preloader").classList.add("loaded");
     document.body.classList.remove("loaded-hiding");
-  }, 500);
+  }, 1500);
 }
 
 // Listener search by input
@@ -301,28 +319,30 @@ footerList.forEach((el) => {
 });
 
 // Render yuor collection
-yourCollBtn.addEventListener("click", showYourColl);
+yourCollBtn.forEach((e) => {
+  e.addEventListener("click", showYourColl);
+});
+
+window.addEventListener("resize", function () {
+  changePlacehold();
+  checkLayout();
+});
+
+window.addEventListener("orientationchange", function () {
+  changePlacehold();
+  checkLayout();
+});
 
 // Check layout
 function checkLayout() {
   document.documentElement.clientHeight <= 500
-    ? ((document.querySelector(".footer").style.height = "max-content"),
-      (document.querySelector(".bottom-line").style.height = "max-content"))
+    ? ((document.querySelector(".footer").style.height = "100%"),
+      (document.querySelector(".bottom-line").style.height = "100%"))
     : ((document.querySelector(".footer").style.height = "88vh"),
       (document.querySelector(".bottom-line").style.height = "7vh"));
 }
-checkLayout();
 
 // Change placeholder
-window.addEventListener("resize", () => {
-  changePlacehold();
-  checkLayout();
-});
-window.addEventListener("orientationchange", () => {
-  changePlacehold();
-  checkLayout();
-});
-
 function changePlacehold() {
   window.innerWidth < 576
     ? document
@@ -332,4 +352,3 @@ function changePlacehold() {
         .getElementById("search-on-top")
         .setAttribute("placeholder", "Search free high-resolution photos");
 }
-changePlacehold();

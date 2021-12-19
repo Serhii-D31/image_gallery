@@ -310,24 +310,26 @@ h1 {
     }
   }
   .title {
-    #search-on-title {
-      display: inline-block;
-      width: 750px;
-      padding: 15px;
-      border-radius: 5px;
-    }
+    .content {
+      #search-on-title {
+        display: inline-block;
+        width: 750px;
+        padding: 15px;
+        border-radius: 5px;
+      }
 
-    .search-title-alert {
-      max-width: 600px;
-      text-align: center;
-      font-size: 32px;
-      padding: 10px;
-      margin: 20px 0 0 0;
-      background-color: rgba(57, 44, 98, 0.9);
-      color: rgb(215, 43, 158);
-      border-radius: 10px;
-      p {
-        margin: 0;
+      .search-title-alert {
+        max-width: 600px;
+        text-align: center;
+        font-size: 32px;
+        padding: 10px;
+        margin: 20px 0 0 0;
+        background-color: rgba(57, 44, 98, 0.9);
+        color: rgb(215, 43, 158);
+        border-radius: 10px;
+        p {
+          margin: 0;
+        }
       }
     }
   }

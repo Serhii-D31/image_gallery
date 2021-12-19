@@ -126,6 +126,10 @@
     font-size: 0.7rem;
     text-transform: uppercase;
     text-align: right;
+
+    span {
+      text-transform: none;
+    }
   }
 }
 
@@ -251,7 +255,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 4%;
     padding: 10% 6%;
-    height: 88vh !important;
+    height: 88vh;
 
     h2 {
       font-family: "Playfair Display";
@@ -276,7 +280,7 @@
       padding: 0px 10px;
       border: none;
       background-color: rgba(87, 124, 39, 0.4);
-      width: 78%;
+      width: 75%;
       height: 40px;
       color: rgb(206, 157, 157);
       border-radius: 5px 0 0 5px;
@@ -288,7 +292,7 @@
 
     [type="submit"] {
       position: absolute;
-      width: 22%;
+      width: 25%;
       border: none;
       color: rgb(255, 255, 255);
       background-color: rgba(15, 15, 15);
