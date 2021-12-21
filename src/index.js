@@ -1,6 +1,7 @@
 // import
 import "./sass/main.scss";
 import ApiService from "./api-service.js";
+import checkScrollHeight from "./calc-scroll-height.js";
 
 // hbs templates
 import gridItem from "./templates/grid-item.hbs";
@@ -19,7 +20,7 @@ const modalWindow = document.querySelector(".modal-window");
 const yourCollBtn = document.querySelectorAll(".your-coll-btn");
 const topList = document.querySelectorAll(".top-list");
 const footerList = document.querySelectorAll(".footer-list");
-var totalPages = "";
+let totalPages = "";
 
 // On load
 function onLoad() {
@@ -291,6 +292,7 @@ window.addEventListener("load", function () {
   onLoad();
   changePlacehold();
   checkLayout();
+  checkScrollHeight();
 });
 
 // Preloader
