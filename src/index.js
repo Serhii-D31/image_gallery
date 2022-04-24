@@ -269,21 +269,20 @@ function clearInputValue() {
 
 // Show more images
 function getMoreImg() {
+  apiService.queryPage++;
   if (apiService.queryPage < totalPages) {
-    apiService.queryPage++;
-
     apiService.fetchImagesByKeyWords(apiService.query).then(({ results }) => {
       renderData(results);
     });
-  } else if (apiService.queryPage === totalPages) {
+  } else if (apiService.queryPage == totalPages) {
     apiService.fetchImagesByKeyWords(apiService.query).then(({ results }) => {
       renderData(results);
     });
     paginationCont.style.visibility = "hidden";
-    paginationArrow.removeEventListener("click", getMoreImg());
+    paginationArrow.removeEventListener("click", getMoreImg);
   } else {
     paginationCont.style.visibility = "hidden";
-    paginationArrow.removeEventListener("click", getMoreImg());
+    paginationArrow.removeEventListener("click", getMoreImg);
   }
 }
 
