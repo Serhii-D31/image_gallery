@@ -96,8 +96,13 @@ function onQueryInput(e) {
         results.length > 0 ? scrollToTop() : true;
         clearDisplay();
         renderData(results);
-        paginationCont.style.visibility = "visible";
-        totalPages = total_pages;
+        if (total_pages == 1) {
+          paginationCont.style.visibility = "hidden";
+          paginationArrow.removeEventListener("click", getMoreImg);
+        } else {
+          paginationCont.style.visibility = "visible";
+          totalPages = total_pages;
+        }
       });
   }
 }
